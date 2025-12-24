@@ -1,4 +1,4 @@
-from src.classes import Product, Category
+#from src.classes import Product, Category
 
 
 def test_init_product1(test_product1):
