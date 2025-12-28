@@ -1,3 +1,5 @@
+import pytest
+
 from src.classes import Product
 
 
@@ -33,3 +35,38 @@ def test_init_category(test_category1):
                                        'Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт.\n')
     assert test_category1.category_count == 1
     assert test_category1.product_count == 146
+
+
+def test_init_smartphone(test_product_smartphone1):
+    assert test_product_smartphone1.name == "Iphone 15"
+    assert test_product_smartphone1.description == "512GB, Gray space"
+    assert test_product_smartphone1.price == 210000.0
+    assert test_product_smartphone1.quantity == 8
+    assert test_product_smartphone1.efficiency == 98.2
+    assert test_product_smartphone1.model == "15"
+    assert test_product_smartphone1.memory == 512
+    assert test_product_smartphone1.color == "Gray space"
+
+
+def test_summ_smartphone(test_product_smartphone1, test_product_smartphone2):
+    assert test_product_smartphone1 + test_product_smartphone2 == 2114000.0
+
+
+def test_summ_error(test_product_smartphone1, test_product_lawnglass1):
+    with pytest.raises(TypeError):
+        test_product_smartphone1 + test_product_lawnglass1
+
+
+def test_init_lawngrass(test_product_lawnglass1):
+    assert test_product_lawnglass1.name == "Газонная трава"
+    assert test_product_lawnglass1.description == "Элитная трава для газона"
+    assert test_product_lawnglass1.price == 500.0
+    assert test_product_lawnglass1.quantity == 20
+    assert test_product_lawnglass1.country == "Россия"
+    assert test_product_lawnglass1.germination_period == "7 дней"
+    assert test_product_lawnglass1.color == "Зеленый"
+
+
+def test_add_product_error(test_category1):
+    with pytest.raises(TypeError):
+        test_category1.add_product(1)
