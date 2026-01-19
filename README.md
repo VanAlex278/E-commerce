@@ -22,6 +22,7 @@ pip install -r requirements.txt
 - Product - продукт.
 - Category - категория.
 - Smartphone, LawnGrass - подклассы класса Product
+- PrintMixin - вывод сообщения в консоль, при создании объекта класса Product
 
 ## Тестирование:
 

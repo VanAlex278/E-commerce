@@ -1,6 +1,6 @@
 import pytest
 
-from src.classes import Product
+from src.classes import Product, Category
 
 
 def test_init_product1(capsys, test_product1):
@@ -13,7 +13,7 @@ def test_init_product1(capsys, test_product1):
     assert test_product1.price == 800
     test_product1.price = 0
     message = capsys.readouterr()
-    assert message.out.strip() == "Цена не должна быть нулевая или отрицательная"
+    assert message.out.strip().split('\n')[-1] == "Цена не должна быть нулевая или отрицательная"
     assert test_product1.price == 800
     new_product = Product.new_product(
         {"name": "Iphone 15", "description": "512GB, Gray space", "price": 123000.0,
@@ -70,3 +70,14 @@ def test_init_lawngrass(test_product_lawnglass1):
 def test_add_product_error(test_category1):
     with pytest.raises(TypeError):
         test_category1.add_product(1)
+
+
+def test_print_mixin(capsys):
+    Product(
+        name="Samsung Galaxy S23 Ultra",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180000.0,
+        quantity=5
+    )
+    message = capsys.readouterr()
+    assert message.out.split('\n')[0] == 'Product(Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, 5)'
