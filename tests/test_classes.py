@@ -72,6 +72,11 @@ def test_add_product_error(test_category1):
         test_category1.add_product(1)
 
 
+def test_add_product_error2(capsys):
+    with pytest.raises(ValueError):
+        Product("Бракованный товар", "Неверное количество", 1000.0, 0)
+
+
 def test_print_mixin(capsys):
     Product(
         name="Samsung Galaxy S23 Ultra",
@@ -81,3 +86,12 @@ def test_print_mixin(capsys):
     )
     message = capsys.readouterr()
     assert message.out.split('\n')[0] == 'Product(Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, 5)'
+
+
+def test_middle_price(test_category1):
+    assert test_category1.middle_price() == 140333.33
+
+
+def test_middle_price_zero():
+    category_empty = Category("Пустая категория", "Категория без продуктов", [])
+    assert category_empty.middle_price() == 0
